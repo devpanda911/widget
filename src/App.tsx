@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0);
 
 
-  const noda = document.querySelector('.parent');
+  const noda = window.parent.document.querySelector('.parent');
+
 
   useEffect(() => {
     noda && (noda.className = 'test');
@@ -26,8 +26,13 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+        <button onClick={() => {
+          if (noda) {
+            noda.className = 'test';
+            alert(JSON.stringify(noda));
+          }
+        }}>
+
         </button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
