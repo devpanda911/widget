@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import Widget from './Widget.tsx';
+import App from './App.tsx';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <Widget/>,
+  <App/>,
 );
