@@ -26,7 +26,7 @@ const DomTreeWidget = () => {
         {node.tagName}
         {node.children && node.children.length > 0 && (
           <div className="dom-children">
-            {node.children.map(renderDomTree)}
+            {node?.children?.map(renderDomTree)}
           </div>
         )}
       </div>
