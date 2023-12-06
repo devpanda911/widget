@@ -1,54 +1,44 @@
 import { useEffect, useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
-import './App.css';
+import './App.css'; // Add later
 
-function App() {
-
-  const [state, setState] = useState('');
-
+const DomTreeWidget = () => {
+  const [domTree, setDomTree] = useState<any>(null);
 
   useEffect(() => {
-    window.addEventListener('message', function (event) {
-      if (event.data.type === 'parentDom') {
-        // Verify the origin and type of the message
-        console.log('Parent DOM received in iframe:', event.data.data);
-
-        setState(JSON.stringify(event.data.data));
-
-        // You can now manipulate the received parent DOM if needed
-        // Note: Be cautious about potential security risks
-      }
-    });
+    // Fetch and set the DOM tree
+    // You can use a library like dom-tree-parser to parse the DOM
+    // For simplicity, let's just use document.body for now
+    setDomTree(document.body);
   }, []);
 
+  const handleNodeClick = (nodeId: any) => {
+    // Send a message to the parent window with the clicked node id
+    window.parent.postMessage({ type: 'highlightNode', nodeId }, '*');
+  };
+
+  const renderDomTree = (node: any) => {
+    if (!node) {
+      return null;
+    }
+
+    return (
+      <div key={node.id} className="dom-node" onClick={() => handleNodeClick(node.id)}>
+        {node.tagName}
+        {node.children && node.children.length > 0 && (
+          <div className="dom-children">
+            {node.children.map(renderDomTree)}
+          </div>
+        )}
+      </div>
+    );
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo"/>
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo"/>
-        </a>
-      </div>
-      <h1>Vite + React1111</h1>
-      <div className="card">
-        <button onClick={() => {
-          alert(JSON.stringify(state));
-        }}>
-          test
-        </button>
-        <p>
-          {state}
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className="dom-tree-widget">
+      <h2>DOM Tree Widget</h2>
+      {renderDomTree(domTree)}
+    </div>
   );
-}
+};
 
-export default App;
+export default DomTreeWidget;
