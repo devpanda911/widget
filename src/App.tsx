@@ -6,12 +6,19 @@ import './App.css';
 function App() {
 
 
-  const noda = window.parent.document.querySelector('.parent');
 
 
   useEffect(() => {
-    noda && (noda.className = 'test');
-  }, [noda]);
+    window.addEventListener('message', function(event) {
+      if (event.data.type === 'parentDom') {
+        // Verify the origin and type of the message
+        console.log('Parent DOM received in iframe:', event.data.data);
+
+        // You can now manipulate the received parent DOM if needed
+        // Note: Be cautious about potential security risks
+      }
+    });
+  }, []);
 
 
   return (
@@ -27,10 +34,7 @@ function App() {
       <h1>Vite + React1111</h1>
       <div className="card">
         <button onClick={() => {
-          if (noda) {
-            noda.className = 'test';
-            alert(JSON.stringify(noda));
-          }
+
         }}>
 test
         </button>
