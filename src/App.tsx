@@ -1,9 +1,12 @@
+import { useEffect } from 'react';
 
 const Widget = () => {
+
+
   return (
     <div>
       <h2>Embedded Widget</h2>
-      {/* Your widget content goes here */}
+      { JSON.stringify(window.parent.document)}
     </div>
   );
 };
