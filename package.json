@@ -8,7 +8,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "predeploy": "tsc && vite build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d dist -b my-deployment-branch1"
   },
   "dependencies": {
     "react": "^18.2.0",
