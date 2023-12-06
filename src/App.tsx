@@ -1,9 +1,11 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css';
 
 function App() {
+
+  const [state, setState] = useState('');
 
 
 
@@ -13,6 +15,8 @@ function App() {
       if (event.data.type === 'parentDom') {
         // Verify the origin and type of the message
         console.log('Parent DOM received in iframe:', event.data.data);
+
+        setState(JSON.stringify(event.data.data))
 
         // You can now manipulate the received parent DOM if needed
         // Note: Be cautious about potential security risks
@@ -34,12 +38,12 @@ function App() {
       <h1>Vite + React1111</h1>
       <div className="card">
         <button onClick={() => {
-
+alert(JSON.stringify(event.data.data))
         }}>
 test
         </button>
         <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
+          {state}
         </p>
       </div>
       <p className="read-the-docs">
