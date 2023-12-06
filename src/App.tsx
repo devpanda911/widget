@@ -8,15 +8,13 @@ function App() {
   const [state, setState] = useState('');
 
 
-
-
   useEffect(() => {
-    window.addEventListener('message', function(event) {
+    window.addEventListener('message', function (event) {
       if (event.data.type === 'parentDom') {
         // Verify the origin and type of the message
         console.log('Parent DOM received in iframe:', event.data.data);
 
-        setState(JSON.stringify(event.data.data))
+        setState(JSON.stringify(event.data.data));
 
         // You can now manipulate the received parent DOM if needed
         // Note: Be cautious about potential security risks
@@ -38,9 +36,9 @@ function App() {
       <h1>Vite + React1111</h1>
       <div className="card">
         <button onClick={() => {
-alert(JSON.stringify(event.data.data))
+          alert(JSON.stringify(state));
         }}>
-test
+          test
         </button>
         <p>
           {state}
