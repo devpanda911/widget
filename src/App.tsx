@@ -6,7 +6,7 @@ import './App.css';
 function App() {
 
 
-  const noda = window.parent.document.querySelector('.parent');
+  const noda = window.parent.document.querySelector('body');
 
 
   useEffect(() => {
